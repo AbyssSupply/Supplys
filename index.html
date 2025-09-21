@@ -114,6 +114,144 @@
       letter-spacing: 0.5px;
     }
     
+    /* Payment Info Button */
+    .payment-info-btn {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: linear-gradient(to right, var(--primary), var(--accent-purple));
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      cursor: pointer;
+      z-index: 100;
+      box-shadow: 0 5px 20px rgba(0, 162, 255, 0.4);
+      transition: var(--transition);
+      animation: pulse 2s infinite;
+    }
+    
+    .payment-info-btn:hover {
+      transform: scale(1.1) rotate(180deg);
+      box-shadow: 0 8px 25px rgba(0, 162, 255, 0.6);
+    }
+    
+    /* Payment Info Modal */
+    .payment-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(5, 5, 5, 0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition-slow);
+      backdrop-filter: blur(10px);
+    }
+    
+    .payment-modal.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .payment-content {
+      background: var(--card-bg);
+      border-radius: 24px;
+      padding: 40px;
+      max-width: 500px;
+      width: 90%;
+      position: relative;
+      transform: translateY(50px);
+      opacity: 0;
+      transition: var(--transition-slow);
+      border: 1px solid var(--glass-border);
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+    }
+    
+    .payment-modal.active .payment-content {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    
+    .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 1.5rem;
+      color: var(--gray);
+      cursor: pointer;
+      transition: var(--transition);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .close-btn:hover {
+      color: var(--primary);
+      background: rgba(255, 255, 255, 0.1);
+      transform: rotate(90deg);
+    }
+    
+    .payment-content h2 {
+      font-size: 2rem;
+      margin-bottom: 30px;
+      background: linear-gradient(to right, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-align: center;
+    }
+    
+    .payment-method {
+      display: flex;
+      align-items: center;
+      margin-bottom: 25px;
+      padding: 20px;
+      border-radius: 16px;
+      background: rgba(0, 0, 0, 0.3);
+      transition: var(--transition);
+    }
+    
+    .payment-method:hover {
+      transform: translateX(10px);
+      background: rgba(0, 162, 255, 0.1);
+    }
+    
+    .payment-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: linear-gradient(to right, var(--primary), var(--accent-purple));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      margin-right: 20px;
+      flex-shrink: 0;
+    }
+    
+    .payment-details h3 {
+      font-size: 1.3rem;
+      margin-bottom: 8px;
+      color: var(--light);
+    }
+    
+    .payment-details p {
+      color: var(--gray);
+      font-size: 1rem;
+    }
+    
     /* Tabs */
     .tabs-container {
       display: flex;
@@ -592,7 +730,7 @@
       position: fixed;
       pointer-events: none;
       z-index: 999;
-      transform: translate(-50%, -50%);
+      transform: translate(-50%, -50);
       transition: transform 0.1s;
     }
     
@@ -653,6 +791,14 @@
       .container {
         padding: 0 20px;
       }
+      
+      .payment-info-btn {
+        bottom: 20px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+        font-size: 1.3rem;
+      }
     }
     
     @media (max-width: 480px) {
@@ -683,6 +829,21 @@
       .order-btn {
         padding: 14px 26px;
       }
+      
+      .payment-content {
+        padding: 30px 20px;
+      }
+      
+      .payment-method {
+        flex-direction: column;
+        text-align: center;
+        padding: 15px;
+      }
+      
+      .payment-icon {
+        margin-right: 0;
+        margin-bottom: 15px;
+      }
     }
   </style>
 </head>
@@ -696,6 +857,41 @@
   <div class="floating-element" id="float-2"></div>
   <div class="floating-element" id="float-3"></div>
   <div class="floating-element" id="float-4"></div>
+
+  <!-- Payment Info Button -->
+  <div class="payment-info-btn">
+    <i class="fas fa-info"></i>
+  </div>
+
+  <!-- Payment Info Modal -->
+  <div class="payment-modal">
+    <div class="payment-content">
+      <div class="close-btn">
+        <i class="fas fa-times"></i>
+      </div>
+      <h2>Payment Methods</h2>
+      
+      <div class="payment-method">
+        <div class="payment-icon">
+          <i class="fab fa-paypal"></i>
+        </div>
+        <div class="payment-details">
+          <h3>PayPal</h3>
+          <p>Secure payments with buyer protection</p>
+        </div>
+      </div>
+      
+      <div class="payment-method">
+        <div class="payment-icon">
+          <i class="fas fa-exchange-alt"></i>
+        </div>
+        <div class="payment-details">
+          <h3>E-Transfer</h3>
+          <p>Direct bank transfers for quick processing</p>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <div class="container">
     <header>
@@ -712,7 +908,9 @@
       </div>
     </div>
 
-    <div class="shop-container" id="shop"></div>
+    <div class="shop-container" id="shop">
+      <!-- Products will be rendered here by JavaScript -->
+    </div>
     
     <!-- Refund Policy Section -->
     <div class="refund-policy">
@@ -729,63 +927,84 @@
   </footer>
 
   <script>
+    // Products data
     const productsData = [
-      { tab: "Clothing", items: [
-        {name: "Corteiz Hoodie", price: "40.40"},
-        {name: "Essentials Shorts", price: "24.61"},
-        {name: "Corteiz Shirts", price: "27.64"},
-        {name: "Ami Shirts", price: "30.35"},
-        {name: "Denim Tears Shorts/Shirts", price: "19.50"},
-        {name: "Ami Shirts (Alternate Listing)", price: "27.64"},
-        {name: "Bape Tee", price: "30.35"},
-        {name: "Stussy T-Shirt", price: "33.70"},
-        {name: "Galaxy Dept Tee", price: "26.04"},
-        {name: "Bape Zip-Up", price: "32.42"},
-        {name: "Sp5der Hoodie", price: "61.45"},
-        {name: "Puma Set", price: "23.88"} // Added with +$10
-      ]},
-      { tab: "Jewelry", items: [
-        {name: "Chrome Heart Bracelet", price: "30.51"},
-        {name: "Chrome Heart Ring", price: "23.01"},
-        {name: "Chrome Heart Crossneckless Neckless", price: "41.67"},
-        {name: "Chrome Hearts Cross Neckless Style 2", price: "40.40"},
-        {name: "Chrome Heart Neckless", price: "30.51"},
-        {name: "Chrome Heart Bracelet", price: "35.45"},
-        {name: "Hermes Paris Bracelet", price: "53.07"}, // Added with +$10
-        {name: "Dior Bracelet", price: "42.06"} // Added with +$10
-      ]},
-      { tab: "Accessory", items: [
-        {name: "Apple Pods Pro 7", price: "55.07"},
-        {name: "Max Black with Noise Cancellation", price: "106.11"},
-        {name: "LV Louis Vuitton Belt (40+ styles)", price: "19.82"},
-        {name: "LV Glasses", price: "29.14"}, // Added with +$10
-        {name: "Creed Cologne Set", price: "34.89"}, // Added with +$10
-        {name: "Louis Vuitton City of Stars", price: "73.17"} // Added with +$10
-      ]},
-      { tab: "Shoes", items: [
-        {name: "Air Force 1", price: "26.36"}
-      ]}
+      { 
+        tab: "Clothing", 
+        items: [
+          {name: "Corteiz Hoodie", price: "40.40"},
+          {name: "Essentials Shorts", price: "24.61"},
+          {name: "Corteiz Shirts", price: "27.64"},
+          {name: "Ami Shirts", price: "30.35"},
+          {name: "Denim Tears Shorts/Shirts", price: "19.50"},
+          {name: "Ami Shirts (Alternate Listing)", price: "27.64"},
+          {name: "Bape Tee", price: "30.35"},
+          {name: "Stussy T-Shirt", price: "33.70"},
+          {name: "Galaxy Dept Tee", price: "26.04"},
+          {name: "Bape Zip-Up", price: "32.42"},
+          {name: "Sp5der Hoodie", price: "61.45"},
+          {name: "Puma Set", price: "23.88"}
+        ]
+      },
+      { 
+        tab: "Jewelry", 
+        items: [
+          {name: "Chrome Heart Bracelet", price: "30.51"},
+          {name: "Chrome Heart Ring", price: "23.01"},
+          {name: "Chrome Heart Crossneckless Neckless", price: "41.67"},
+          {name: "Chrome Hearts Cross Neckless Style 2", price: "40.40"},
+          {name: "Chrome Heart Neckless", price: "30.51"},
+          {name: "Chrome Heart Bracelet", price: "35.45"},
+          {name: "Hermes Paris Bracelet", price: "53.07"},
+          {name: "Dior Bracelet", price: "42.06"}
+        ]
+      },
+      { 
+        tab: "Accessory", 
+        items: [
+          {name: "Apple Pods Pro 7", price: "55.07"},
+          {name: "Max Black with Noise Cancellation", price: "106.11"},
+          {name: "LV Louis Vuitton Belt (40+ styles)", price: "19.82"},
+          {name: "LV Glasses", price: "29.14"},
+          {name: "Creed Cologne Set", price: "34.89"},
+          {name: "Louis Vuitton City of Stars", price: "73.17"}
+        ]
+      },
+      { 
+        tab: "Shoes", 
+        items: [
+          {name: "Air Force 1", price: "26.36"}
+        ]
+      }
     ];
 
+    // DOM elements
     const shop = document.getElementById('shop');
     const tabs = document.querySelectorAll('.tab');
+    const paymentInfoBtn = document.querySelector('.payment-info-btn');
+    const paymentModal = document.querySelector('.payment-modal');
+    const closeBtn = document.querySelector('.close-btn');
 
+    // Function to render products for a specific tab
     function renderTab(tabName) {
       shop.innerHTML = '';
       const tabData = productsData.find(t => t.tab === tabName);
-      if(tabData) {
-        tabData.items.forEach((p, index) => {
+      
+      if (tabData) {
+        tabData.items.forEach((product, index) => {
           const card = document.createElement('div');
           card.className = 'product-card';
-          const mailtoLink = `mailto:abyssupply@gmail.com?subject=Order Request: ${encodeURIComponent(p.name)}&body=Hi,%0D%0A%0D%0AI am interested in ${encodeURIComponent(p.name)} priced at $${encodeURIComponent(p.price)}.%0D%0A%0D%0APlease provide details for completing my order.%0D%0A%0D%0AThanks.`;
+          const mailtoLink = `mailto:abyssupply@gmail.com?subject=Order Request: ${encodeURIComponent(product.name)}&body=Hi,%0D%0A%0D%0AI am interested in ${encodeURIComponent(product.name)} priced at $${encodeURIComponent(product.price)}.%0D%0A%0D%0APlease provide details for completing my order.%0D%0A%0D%0AThanks.`;
+          
           card.innerHTML = `
             <div class="product-image">
               <i class="fas fa-shopping-bag"></i>
             </div>
-            <h3>${p.name}</h3>
-            <div class="product-price">${p.price}</div>
+            <h3>${product.name}</h3>
+            <div class="product-price">${product.price}</div>
             <a href="${mailtoLink}" class="order-btn"><i class="fas fa-shopping-cart"></i> Order Now</a>
           `;
+          
           shop.appendChild(card);
           
           // Add staggered animation
@@ -795,9 +1014,9 @@
     }
 
     // Initial render
-    setTimeout(() => {
+    document.addEventListener('DOMContentLoaded', () => {
       renderTab('Clothing');
-    }, 500);
+    });
 
     // Tab switching
     tabs.forEach(tab => {
@@ -808,34 +1027,55 @@
       });
     });
 
+    // Payment info modal
+    paymentInfoBtn.addEventListener('click', () => {
+      paymentModal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    });
+
+    closeBtn.addEventListener('click', () => {
+      paymentModal.classList.remove('active');
+      document.body.style.overflow = 'auto';
+    });
+
+    // Close modal when clicking outside
+    paymentModal.addEventListener('click', (e) => {
+      if (e.target === paymentModal) {
+        paymentModal.classList.remove('active');
+        document.body.style.overflow = 'auto';
+      }
+    });
+
     // Custom cursor
     const cursorDot = document.querySelector('.cursor-dot');
     const cursorOutline = document.querySelector('.cursor-outline');
     
-    document.addEventListener('mousemove', (e) => {
-      cursorDot.style.left = `${e.clientX}px`;
-      cursorDot.style.top = `${e.clientY}px`;
-      
-      cursorOutline.style.left = `${e.clientX}px`;
-      cursorOutline.style.top = `${e.clientY}px`;
-    });
-    
-    // Interactive cursor effects
-    const interactiveElements = document.querySelectorAll('a, button, .tab, .product-card');
-    
-    interactiveElements.forEach(el => {
-      el.addEventListener('mouseenter', () => {
-        cursorDot.style.transform = 'translate(-50%, -50%) scale(1.5)';
-        cursorOutline.style.transform = 'translate(-50%, -50%) scale(1.5)';
-        cursorOutline.style.borderWidth = '1px';
+    if (cursorDot && cursorOutline) {
+      document.addEventListener('mousemove', (e) => {
+        cursorDot.style.left = `${e.clientX}px`;
+        cursorDot.style.top = `${e.clientY}px`;
+        
+        cursorOutline.style.left = `${e.clientX}px`;
+        cursorOutline.style.top = `${e.clientY}px`;
       });
       
-      el.addEventListener('mouseleave', () => {
-        cursorDot.style.transform = 'translate(-50%, -50%) scale(1)';
-        cursorOutline.style.transform = 'translate(-50%, -50%) scale(1)';
-        cursorOutline.style.borderWidth = '2px';
+      // Interactive cursor effects
+      const interactiveElements = document.querySelectorAll('a, button, .tab, .product-card');
+      
+      interactiveElements.forEach(el => {
+        el.addEventListener('mouseenter', () => {
+          cursorDot.style.transform = 'translate(-50%, -50%) scale(1.5)';
+          cursorOutline.style.transform = 'translate(-50%, -50%) scale(1.5)';
+          cursorOutline.style.borderWidth = '1px';
+        });
+        
+        el.addEventListener('mouseleave', () => {
+          cursorDot.style.transform = 'translate(-50%, -50%) scale(1)';
+          cursorOutline.style.transform = 'translate(-50%, -50%) scale(1)';
+          cursorOutline.style.borderWidth = '2px';
+        });
       });
-    });
+    }
   </script>
 </body>
 </html>
