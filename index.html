@@ -1,14 +1,4 @@
 <!DOCTYPE html>
-<html lang="en" >
-<head>
-  <meta charset="UTF-8">
-  <title>Untitled</title>
-  
-
-</head>
-<body>
-<!-- partial:index.partial.html -->
-<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -751,7 +741,8 @@
         {name: "Stussy T-Shirt", price: "33.70"},
         {name: "Galaxy Dept Tee", price: "26.04"},
         {name: "Bape Zip-Up", price: "32.42"},
-        {name: "Sp5der Hoodie", price: "61.45"}
+        {name: "Sp5der Hoodie", price: "61.45"},
+        {name: "Puma Set", price: "23.88"} // Added with +$10
       ]},
       { tab: "Jewelry", items: [
         {name: "Chrome Heart Bracelet", price: "30.51"},
@@ -759,12 +750,17 @@
         {name: "Chrome Heart Crossneckless Neckless", price: "41.67"},
         {name: "Chrome Hearts Cross Neckless Style 2", price: "40.40"},
         {name: "Chrome Heart Neckless", price: "30.51"},
-        {name: "Chrome Heart Bracelet", price: "35.45"}
+        {name: "Chrome Heart Bracelet", price: "35.45"},
+        {name: "Hermes Paris Bracelet", price: "53.07"}, // Added with +$10
+        {name: "Dior Bracelet", price: "42.06"} // Added with +$10
       ]},
       { tab: "Accessory", items: [
         {name: "Apple Pods Pro 7", price: "55.07"},
         {name: "Max Black with Noise Cancellation", price: "106.11"},
-        {name: "LV Louis Vuitton Belt (40+ styles)", price: "19.82"}
+        {name: "LV Louis Vuitton Belt (40+ styles)", price: "19.82"},
+        {name: "LV Glasses", price: "29.14"}, // Added with +$10
+        {name: "Creed Cologne Set", price: "34.89"}, // Added with +$10
+        {name: "Louis Vuitton City of Stars", price: "73.17"} // Added with +$10
       ]},
       { tab: "Shoes", items: [
         {name: "Air Force 1", price: "26.36"}
@@ -781,7 +777,7 @@
         tabData.items.forEach((p, index) => {
           const card = document.createElement('div');
           card.className = 'product-card';
-          const mailtoLink = `mailto:abyssupply@gmail.com?subject=Order Request: ${encodeURIComponent(p.name)}&body=Hi,%0D%0A%0D%0AI am interested in ${encodeURIComponent(p.name)} priced at ${encodeURIComponent(p.price)}.%0D%0A%0D%0APlease provide details for completing my order.%0D%0A%0D%0AThanks.`;
+          const mailtoLink = `mailto:abyssupply@gmail.com?subject=Order Request: ${encodeURIComponent(p.name)}&body=Hi,%0D%0A%0D%0AI am interested in ${encodeURIComponent(p.name)} priced at $${encodeURIComponent(p.price)}.%0D%0A%0D%0APlease provide details for completing my order.%0D%0A%0D%0AThanks.`;
           card.innerHTML = `
             <div class="product-image">
               <i class="fas fa-shopping-bag"></i>
@@ -841,9 +837,5 @@
       });
     });
   </script>
-</body>
-</html>
-<!-- partial -->
-  
 </body>
 </html>
