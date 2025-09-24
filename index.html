@@ -746,6 +746,16 @@
       transition: all 0.2s ease-out;
     }
     
+    /* Particle Background */
+    #particles-js {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      top: 0;
+      left: 0;
+    }
+    
     /* Responsive */
     @media (max-width: 1024px) {
       .logo {
@@ -852,6 +862,9 @@
   <div class="cursor-dot"></div>
   <div class="cursor-outline"></div>
 
+  <!-- Particle Background -->
+  <div id="particles-js"></div>
+
   <!-- Floating background elements -->
   <div class="floating-element" id="float-1"></div>
   <div class="floating-element" id="float-2"></div>
@@ -926,7 +939,46 @@
     </div>
   </footer>
 
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
   <script>
+    // Initialize particle background
+    document.addEventListener('DOMContentLoaded', function() {
+      particlesJS('particles-js', {
+        particles: {
+          number: { value: 80, density: { enable: true, value_area: 800 } },
+          color: { value: "#00a2ff" },
+          shape: { type: "circle" },
+          opacity: { value: 0.3, random: true },
+          size: { value: 3, random: true },
+          line_linked: {
+            enable: true,
+            distance: 150,
+            color: "#00a2ff",
+            opacity: 0.1,
+            width: 1
+          },
+          move: {
+            enable: true,
+            speed: 1,
+            direction: "none",
+            random: true,
+            straight: false,
+            out_mode: "out",
+            bounce: false
+          }
+        },
+        interactivity: {
+          detect_on: "canvas",
+          events: {
+            onhover: { enable: true, mode: "repulse" },
+            onclick: { enable: true, mode: "push" },
+            resize: true
+          }
+        },
+        retina_detect: true
+      });
+    });
+
     // Products data
     const productsData = [
       { 
